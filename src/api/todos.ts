@@ -12,6 +12,12 @@ export async function UserTodo(id: string): Promise<Todos[]> {
 
   return data.todos;
 }
+export async function getTodo(todoId: number): Promise<Todo> {
+  const data = await apiGet<Todo>(`https://dummyjson.com/todos/${todoId}`);
+
+  return data;
+}
+
 export async function addTodo(
   todo: string,
   status: boolean,
@@ -45,7 +51,7 @@ export async function updateTodo(
   userId: number,
 ): Promise<Todo> {
   const response = await fetch(`https://dummyjson.com/todos/${todoId}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },

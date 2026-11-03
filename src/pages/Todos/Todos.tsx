@@ -1,8 +1,7 @@
 import { deleteTodo, UserTodo } from "@/api/todos";
 import { Button } from "@/components/ui/button";
-// import { NewThemeContext } from "@/context/Theme";
 import type { Todo } from "@/types/types";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const TodosPage = () => {
@@ -16,11 +15,12 @@ const TodosPage = () => {
       await deleteTodo(todoId);
 
       setUserTodo((prev) => prev.filter((item) => item.id !== todoId));
+
+      alert("Todo deleted successfully!");
     } catch (error) {
       alert(error instanceof Error ? error.message : "Failed to delete todo");
     }
   }
-  // const theme = useContext(NewThemeContext);
 
   useEffect(() => {
     if (!id) return;
@@ -35,9 +35,7 @@ const TodosPage = () => {
   return (
     <div className="p-6">
       <h1 className="mb-4 font-semibold text-3xl">User {id} Todos</h1>
-      {/* <Button className={theme === "light" ? "bg-red-500" : "bg-green-500"}>
-        Check
-      </Button> */}
+
       {userTodo.map((items) => (
         <div key={items.id} className="mb-4 rounded border p-4">
           <p>Todo: {items.todo}</p>
